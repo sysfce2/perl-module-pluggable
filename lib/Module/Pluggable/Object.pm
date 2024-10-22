@@ -7,11 +7,10 @@ use File::Spec::Functions qw(splitdir catdir curdir catfile abs2rel);
 use Carp qw(croak carp confess);
 use Devel::InnerPackage;
 use Scalar::Util qw( blessed );
-use vars qw($VERSION $MR);
 
 use if $] > 5.017, 'deprecate';
 
-$VERSION = '5.2';
+our $VERSION = '5.2';
 
 BEGIN {
     eval {  require Module::Runtime };
@@ -285,7 +284,7 @@ sub _is_editor_junk {
     # saved.
     return 1 if $name =~ /^\.#/;
     # Vim can leave these files behind if it crashes.
-    return 1 if $name =~ /\.sw[po]$/;
+    return 1 if $name =~ /^[._].*\.s[a-w][a-z]$/;
 
     return 0;
 }
